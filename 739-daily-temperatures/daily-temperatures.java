@@ -5,14 +5,15 @@ class Solution {
 
         Stack<Integer> st = new Stack<>();
 
-        for(int i = 0 ; i < n ; i++){
-            while(!st.isEmpty() && temperatures[i] > temperatures[st.peek()]){
-                int x = st.pop();
-                arr[x] = i-x ;
+        for(int i = n-1 ; i >= 0 ; i--){
+            while(!st.isEmpty() && temperatures[st.peek()] <= temperatures[i]){
+                st.pop();
             }
-
+            if(st.isEmpty()) arr[i] = 0;
+            else arr[i] = st.peek() - i; 
             st.push(i);
         }
+
         return arr;
     }
 }
